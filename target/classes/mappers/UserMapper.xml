@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.green.springwebproject.dao.UserMapper">
+    <select id="login" resultType="kr.green.springwebproject.dao.User">
+		select * from account where id = #{id} and pw = #{pw}
+	</select>
+	<insert id="signup">
+		insert into account(id,pw,name,email,admin) 
+		values(#{user.id},#{user.pw},#{user.name},#{user.email},#{user.admin})
+	</insert>
+	
+	<select id="loginById" 
+		resultType="kr.green.springwebproject.dao.User">
+		select * from account where id = #{id}
+	</select>
+	<update id="updateUser">
+		update account set pw=#{user.pw}, 
+		email=#{user.email},
+		admin=#{user.admin}
+		where id=#{user.id}
+	</update>
+	<select id="userListExceptLoginUser" 
+    	resultType="kr.green.springwebproject.dao.User">
+		select * from account where not id = #{user.id}
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="countUsersExceptLoginUser"
+		resultType="java.lang.Integer">
+		select count(id) from account
+		where id != #{user.id}
+	</select>
+	
+	<delete id="withdraw">
+		delete from account
+		where id=#{user.id}
+	</delete>
+	
+	
+</mapper>

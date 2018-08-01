@@ -1,0 +1,131 @@
+package kr.green.springwebproject.utils;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.UUID;
+
+import javax.imageio.ImageIO;
+
+import org.imgscalr.Scalr;
+import org.springframework.util.FileCopyUtils;
+
+public class UploadFileUtils {
+	public static String uploadFile(String uploadPath, String originalName, byte[] 	
+			fileData)throws Exception{
+		//동일한 파일을 업로드 했을 때 구분하기 위한 고유 범용 식별자를 생성
+		UUID uid = UUID.randomUUID();
+		//서버에 저장할 파일 이름을 설정 - 고유범용식별자_파일명
+		String savedName = uid.toString() +"_" + originalName;
+		//서버에 지정한 폴더에 저장하기 위해 만들 폴더 경로(하위 펄더) 경로
+		//하위폴더가 없으면 서버에 지정한 폴더에 많은 파일들이 업로드 되어 성능저하가 일어남.
+		//따라서 하위 폴더를 생성해서 파일들을 분할하여 관리
+		//일폴어의 경로를 반환
+		String savedPath = calcPath(uploadPath);
+		//서버경로/일폴더경로/파일 경로를 생성
+		//서버경로\폴더경로\index.htm 파일 데이터를 복사해서 생성
+		File target = new File(uploadPath + savedPath, savedName);
+		FileCopyUtils.copy(fileData, target);
+		/*
+		 * 확장자 추출
+		 */
+		String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
+		
+		
+		String uploadFileName = null;
+		/*
+		 * 확장자가 이미지이면(JPG, GIF, PNG
+		 */
+		if(MediaUtils.getMediaType(formatName)!=null) {
+			uploadFileName =
+					makeThumbnail(uploadPath, savedPath, savedName);
+		}else {
+			uploadFileName =
+					makeIcon(uploadPath, savedPath, savedName);
+		}	
+		return uploadFileName;
+	}
+	
+	private static String calcPath(String uploadPath) {
+		Calendar cal = Calendar.getInstance();
+		// File.separator : \\ + 2018
+		String yearPath = File.separator+cal.get(Calendar.YEAR);
+		// \\ + 2018 + \\ + 06
+		// DecimalFormat : 두자리 맞춤
+		String monthPath = yearPath + File.separator 
+            + new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
+		// \\ + 2018 + \\ + 06 + \\ + 28
+		String datePath = monthPath + File.separator 
+            + new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		// 폴더생성(서버 경로에 년도 폴더생성, 년도 하위폴더에 월폴더 생성, 월 하위폴더에 일 폴더 생성)
+		makeDir(uploadPath, yearPath, monthPath, datePath);
+		
+		return datePath;
+ 
+	}
+	private static void makeDir(String uploadPath, String... paths) {
+		// 일 폴더가 생성되어 있으면 더이상 작업하지 않고 종료
+		// 일 폴더를 이용하여 서버경로 + 일폴더 경로를 합친 경로를 생성하고,
+		// 생성된 경로가 존재하면 작업를 할 필요가 없음
+		if(new File(uploadPath + paths[paths.length-1]).exists())
+			return;
+		//매개변수에서 입력받은 경로들을 하나씩 가져와서 해당 경로에 폴더가 있는지 없은지 확인하여 있으면 그냥 넘어가고
+		//없으면 폴더를 생성하는 반복문
+		for(String path : paths) {
+			File dirPath = new File(uploadPath + path);
+			//해당 경로가 존재하지 않으면
+			if( !dirPath.exists())
+				dirPath.mkdir(); //해당경로를 생성 = 폴더을 생성
+		}
+	}
+	private static String makeIcon(String uploadPath, String path, String fileName)
+        	throws Exception{
+		String iconName = uploadPath + path + File.separator + fileName;
+		//iconName.substring(uploadPath.length()) :
+		//Full경로(서버경로\폴더경로\파일명)에서  서버경로를 제외한 경로를 추출
+		//(폴더경로\파일명)
+		//replace(File.separatorChar, '/') : 폴더경로\파일명을
+		//폴더경로/파일명으로 수정 (예 : 2018/06/28/파일명)
+		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');
+	}
+	
+	private static String makeThumbnail(String uploadPath, String path, String fileName)
+        	throws Exception{
+		/* 
+		 * file을 통해 이미지 파일을 경로를 읽어오고 ImageIO.read를 통해
+		 * 이미지 파일을 BufferedImage에 저장
+		 */
+		BufferedImage sourceImg = ImageIO.read(
+				new File(uploadPath + path, fileName));
+		/* 
+		 * 원본 이미지를 기준으로 썸네일을 생성
+		 */
+		
+		BufferedImage destImag = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC,
+				Scalr.Mode.FIT_TO_HEIGHT, 50);
+		
+		/* 
+		 * 썸네일명을 생성하는데 파일명 앞에 S_가 붙음
+		 */
+		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
+		
+		/* 
+		 * 썸네일명을 가지는 파일을 생성
+		 */
+		File newFile = new File(thumbnailName);
+		/* 
+		 * 이미지의 확장자 추출
+		 */
+		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+		/*
+		 * 썸네일 이미지를 저장
+		 */
+		ImageIO.write(destImag, formatName.toUpperCase(), newFile);
+		/*
+		 * 썸네일 경로를 서버 경로에서 URL경로로 수정
+		 */
+		return thumbnailName.substring(uploadPath.length())
+				.replace(File.separatorChar, '/');
+	}	
+}
