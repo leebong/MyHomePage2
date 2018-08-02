@@ -67,12 +67,12 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Personal">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePersonal" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">Personal settings</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+          <ul class="sidenav-second-level collapse" id="collapsePersonal">
             <li>
               <c:if test="${admin}">
 			  	 <a href="/admin/board">Admin Page</a>

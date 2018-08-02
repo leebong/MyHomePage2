@@ -35,6 +35,8 @@ import kr.green.springwebproject.pagenation.PageMaker;
 import kr.green.springwebproject.service.BoardService;
 import kr.green.springwebproject.service.UserService;
 
+
+
 /**
  * Handles requests for the application home page.
  */
@@ -61,6 +63,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 				
@@ -276,11 +279,35 @@ public class HomeController {
 		return "cards";
 	}
 	
-	@RequestMapping(value = "/charts", method = RequestMethod.GET)
+	
+	/*@RequestMapping(value = "/chart", method = RequestMethod.GET)
 	public String charts(Model model, HttpServletRequest request) {
 				
-		return "charts";
-	}
+		return "/jsp/chart";
+	}*/
+	
+	
+	/*  2018-08-01 수정
+	 *  package com.canvasjs.controllers;
+
+		import org.springframework.stereotype.Controller;
+		import org.springframework.ui.ModelMap;
+		import org.springframework.web.bind.annotation.RequestMapping;
+		import org.springframework.web.bind.annotation.RequestMethod;
+		import org.springframework.web.servlet.ModelAndView;
+		
+		@Controller
+		public class HomeController {
+	*/ 	
+		@RequestMapping(value = "/charts", method = RequestMethod.GET)
+		public ModelAndView chart(ModelMap model) {
+			ModelAndView modelAndView = new ModelAndView("/charts");
+			modelAndView.addObject("title", "Home");
+			return modelAndView;
+		}
+	
+	
+	
 	
 	@RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
 	public String forgotpassword(Model model, HttpServletRequest request) {

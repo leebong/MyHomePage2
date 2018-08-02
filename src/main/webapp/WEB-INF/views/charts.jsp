@@ -14,6 +14,12 @@
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+  
+  <!-- scripts -->
+  <script src="/assets/script/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="/assets/script/canvasjs.min.js" type="text/javascript"></script>
+
+  
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -31,11 +37,91 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+<!--         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="charts">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Charts</span>
-          </a>
+          </a> -->
+          
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCharts" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">Charts</span>
+          </a> 
+          <ul class="sidenav-second-level collapse" id="collapseCharts">
+	      
+	      
+	      <!-- 2018-08-02 /chart types -->    
+	          <li data-toggle="collapse" href="#chart-types" aria-expanded="false" aria-controls="chart-types">
+	          	<a href="#"><i class="fa fa-area-chart" aria-hidden="true"></i><span>CHART TYPES</span></a>
+	          </li>
+			  <li>
+				<ul id="chart-types" class="sub-menu collapse ">
+					<li><a href="/chart-types/column">Column Chart</a></li>
+					<li><a href="/chart-types/line">Line Chart</a></li>
+					<li><a href="/chart-types/step-line">Step Line Chart</a></li>
+					<li><a href="/chart-types/spline">Spline Chart</a></li>
+					<li><a href="/chart-types/step-area">Step Area Chart</a></li>
+					<li><a href="/chart-types/area">Area Chart</a></li>
+					<li><a href="/chart-types/spline-area">Spline Area Chart</a></li>
+					<li><a href="/chart-types/bar">Bar Chart</a></li>
+					<li><a href="/chart-types/pie">Pie Chart</a></li>
+					<li><a href="/chart-types/database">Database Chart</a></li>
+					<li><a href="/chart-types/doughnut">Doughnut Chart</a></li>
+					<li><a href="/chart-types/bubble">Bubble Chart</a></li>
+					<li><a href="/chart-types/scatter">Scatter Chart</a></li>
+					<li><a href="/chart-types/stacked-column">Stacked Column Chart</a></li>
+					<li><a href="/chart-types/stacked-column100">Stacked Column 100% Chart</a></li>
+					<li><a href="/chart-types/stacked-area">Stacked Area Chart</a></li>
+					<li><a href="/chart-types/stacked-area100">Stacked Area 100% Chart</a></li>
+					<li><a href="/chart-types/stacked-bar">Stacked Bar Chart</a></li>
+					<li><a href="/chart-types/stacked-bar100">Stacked Bar 100% Chart</a></li>
+				</ul>
+			</li>	
+			<li role="separator" class="divider"></li>
+			<!--  features -->
+			<li data-toggle="collapse" href="#features" aria-expanded="false"
+				aria-controls="features"><a href="#"> <i class="fa fa-flask"
+					aria-hidden="true"></i> <span>FEATURES</span>
+			</a></li>
+			<li>
+				<ul id="features" class="sub-menu collapse ">
+					<li><a href="/features/zooming-panning">Zooming &amp; Panning</a></li>
+					<li><a href="/features/export-chart">Export Chart as Image</a></li>
+					<li><a href="/features/events-handling">Event Handling</a></li>
+					<li><a href="/features/log-axis">Logarithmic Axis</a></li>
+					<li><a href="/features/date-time">Date-Time Axis</a></li>
+					<li><a href="/features/reverse-axis">Reverse Axis</a></li>
+					<li><a href="/features/striplines">StripLines</a></li>
+					<li><a href="/features/multiple-y-axis">Multiple Y Axis</a></li>
+					<li><a href="/features/multi-series-chart">Multiseries Charts</a></li>
+				</ul>
+			</li>
+			<!--  /features -->
+			<li role="separator" class="divider"></li>
+			<!--  how to  -->
+			<li data-toggle="collapse" href="#how-to" aria-expanded="false"
+				aria-controls="how-to"><a href="#"> <i class="fa fa-wrench"
+					aria-hidden="true"></i> <span>HOW TO</span>
+			</a></li>
+			<li>
+				<ul id="how-to" class="sub-menu collapse ">
+					<li><a href="/how-to/enable-disable-ds">Hide / Show DataSeries</a></li>
+	                <li><a href="/how-to/live-chart">Dynamic / Live Chart</a></li>
+	                <li><a href="/how-to/sync-multiple-charts">Sync Multiple Charts</a></li>
+	                <li><a href="/how-to/datapoints-from-user-input">Add Data Points From User Input</a></li>
+	                <li><a href="/how-to/multiple-charts-in-a-page">Multiple Charts in a Page</a></li>
+	                <li><a href="/how-to/play-stop-live-chart">Play / Stop Live Chart</a></li>
+	                <li><a href="/how-to/create-chart-from-json">Charts using JSON &amp; AJAX</a></li>
+	                <li><a href="/how-to/create-chart-from-xml">Charts using XML &amp; AJAX</a></li>
+	                <li><a href="/how-to/create-chart-from-csv">Charts using CSV &amp; AJAX</a></li>
+	                <li><a href="/how-to/data-from-database">Render Data From Database</a></li>
+				</ul>
+			</li>
+        </ul>  
+       
+          
+          
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Boards">
           <a class="nav-link" href="board/list">
@@ -57,16 +143,16 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Personal">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePersonal" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">Personal settings</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+          <ul class="sidenav-second-level collapse" id="collapsePersonal">
             <li>
               <c:if test="${admin}">
 			  	 <a href="/admin/board">Admin Page</a>
-			  </c:if>           
+			  </c:if>          
             </li>
             <li>
               <a href="modify">Register Modify an Page</a>
@@ -271,7 +357,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small>Copyright © Lee, Sang-bong 2018</small>
         </div>
       </div>
     </footer>

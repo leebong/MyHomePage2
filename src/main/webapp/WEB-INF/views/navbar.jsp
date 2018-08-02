@@ -57,17 +57,19 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Personal">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePersonal" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Example Pages</span>
+            <span class="nav-link-text">Personal settings</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+          <ul class="sidenav-second-level collapse" id="collapsePersonal">
             <li>
-              <a href="login">Login Page</a>
+              <c:if test="${admin}">
+			  	 <a href="/admin/board">Admin Page</a>
+			  </c:if>          
             </li>
             <li>
-              <a href="register">Registration Page</a>
+              <a href="modify">Register Modify an Page</a>
             </li>
             <li>
               <a href="forgot-password">Forgot Password Page</a>
