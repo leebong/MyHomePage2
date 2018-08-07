@@ -22,6 +22,7 @@
 		 	author = #{board.author},
 		 	contents = #{board.contents},
 		 	created_date = #{board.created_date},
+		 	hit = #{board.hit},
 		 	filepath = #{board.filepath}
 	 	where
 	 		number = #{board.number}

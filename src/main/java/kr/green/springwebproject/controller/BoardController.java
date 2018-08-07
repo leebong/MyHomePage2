@@ -68,7 +68,7 @@ public class BoardController {
 		
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
-		
+
 		boolean admin = userService.isAdmin(user);
 		
 		model.addAttribute("admin", admin);
@@ -77,14 +77,18 @@ public class BoardController {
 		model.addAttribute("search", search);
 		model.addAttribute("type", type);
 		
+		
 		return "/board/list";
 	}
 	
 	@RequestMapping(value="detail")
 	public String boardDetail(HttpServletRequest request,
-			Model model, int number) {
+			Model model, int number) throws Exception {
 		
-		Board board = boardService.getBoard(number);				
+		//Board board = boardService.getBoard(number);
+		Board board = boardService.increaseHit(number);
+		boardService.modifyBoard(board, null, null, null);
+		
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 		boolean isAuthor = boardService.isAuthor(user, board);
@@ -98,6 +102,7 @@ public class BoardController {
 		}
 		model.addAttribute("isAuthor", isAuthor);
 		model.addAttribute("board", board);
+		//model.addAttribute("hit", hit);
 		return "/board/detail";
 	}
 	

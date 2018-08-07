@@ -73,6 +73,13 @@ public class BoardService {
 	public Board getBoard(int number) {	
 		return boardMapper.getBoardByNumber(number);
 	}
+	
+	public Board increaseHit(int number) {
+		Board board = boardMapper.getBoardByNumber(number);
+		board.setHit(board.getHit()+1);
+		return board;
+	}
+	
 
 	public boolean isAuthor(User user, Board board) {
 		if(user != null) {
@@ -89,7 +96,7 @@ public class BoardService {
 		Date created_date = new Date();
 		board.setCreated_date(created_date);	
 		Board tmp = boardMapper.getBoardByNumber(board.getNumber());
-		
+		tmp.setHit(board.getHit());
 		if(file != null && file.getOriginalFilename().length() != 0) {	
 			String filepath = UploadFileUtils.uploadFile
 					(uploadPath, file.getOriginalFilename(),file.getBytes());

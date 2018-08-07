@@ -256,16 +256,20 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>No.</th>
-                  <th>Contents</th>
-                  <th>Name</th>
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                  <th>날짜</th>
+                  <th>조회수</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>No.</th>
-                  <th>Contents</th>
-                  <th>Name</th>
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                  <th>날짜</th>
+                  <th>조회수</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -273,7 +277,9 @@
 					<tr>
 						<td>${board.number}</td>
 						<td><a href="/board/detail?number=${board.number}">${board.title }</a></td>
-						<td>${board.author }</td>
+						<td>${board.author}</td>
+						<td>${board.created_date}</td>
+						<td>${board.hit}</td>
 					</tr>
 				</c:forEach>
               </tbody>

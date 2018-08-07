@@ -47,15 +47,11 @@
 	
 	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-<!-- 		<beans:property name="viewClass" value="kr.green.springwebproject.controller.JstlView" /> -->
+	<!-- <beans:property name="viewClass" value="kr.green.springwebproject.controller.JstlView" /> -->
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	
-	
-	
-	
+
 	
 	<beans:bean id="loginInterceptor" 
 	class="kr.green.springwebproject.interceptor.LoginInterceptor">

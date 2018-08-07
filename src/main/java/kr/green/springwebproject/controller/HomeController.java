@@ -2,6 +2,7 @@ package kr.green.springwebproject.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,7 +48,6 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	
-	
 	@Autowired
 	private BoardMapper boardMapper;
 	
@@ -59,6 +60,8 @@ public class HomeController {
 	//2018-06-22 메일추가
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -280,33 +283,12 @@ public class HomeController {
 	}
 	
 	
-	/*@RequestMapping(value = "/chart", method = RequestMethod.GET)
-	public String charts(Model model, HttpServletRequest request) {
+	
+	@RequestMapping(value = "/dchart", method = RequestMethod.GET)
+	public String datachart_get(Model model, HttpServletRequest request) {
 				
-		return "/jsp/chart";
-	}*/
-	
-	
-	/*  2018-08-01 수정
-	 *  package com.canvasjs.controllers;
-
-		import org.springframework.stereotype.Controller;
-		import org.springframework.ui.ModelMap;
-		import org.springframework.web.bind.annotation.RequestMapping;
-		import org.springframework.web.bind.annotation.RequestMethod;
-		import org.springframework.web.servlet.ModelAndView;
-		
-		@Controller
-		public class HomeController {
-	*/ 	
-		@RequestMapping(value = "/charts", method = RequestMethod.GET)
-		public ModelAndView chart(ModelMap model) {
-			ModelAndView modelAndView = new ModelAndView("/charts");
-			modelAndView.addObject("title", "Home");
-			return modelAndView;
-		}
-	
-	
+		return "dchart";
+	}
 	
 	
 	@RequestMapping(value = "/forgot-password", method = RequestMethod.GET)

@@ -40,9 +40,23 @@
         </li>
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts">
+          <a class="nav-link" href="achart">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Charts</span>
+            <span class="nav-link-text">achart</span>
+          </a>
+        </li>
+        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Chart">
+          <a class="nav-link" href="chart">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">chart</span>
+          </a>
+        </li>
+        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="DataChart">
+          <a class="nav-link" href="datachart">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">DataChart</span>
           </a>
         </li>
         
@@ -319,6 +333,8 @@
         </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
+      
+      
       <div class="row">
         <div class="col-lg-8">
           <!-- Example Bar Chart Card-->

@@ -1,5 +1,6 @@
 package kr.green.springwebproject.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /* DB에서 게시판 정보를 가져와 저장할 클래스 */
@@ -12,6 +13,8 @@ public class Board {
 	private String contents;
 	private String disable="FALSE";
 	private Date created_date;
+	private String email;
+	private Integer hit;
 	private String filepath;
 	
 	
@@ -46,8 +49,29 @@ public class Board {
 		this.contents = contents;
 	}
 
-	public Date getCreated_date() {
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Integer getHit() {
+		return hit;
+	}
+	public void setHit(Integer hit) {
+		this.hit = hit;
+	}
+	/*	public Date getCreated_date() {
 		return created_date;
+	}
+	
+*/	
+	public String getCreated_date() {
+		 SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 String date = myFormat.format(created_date);
+
+		return date;
 	}
 	public void setCreated_date(Date created_date) {
 		this.created_date = created_date;
